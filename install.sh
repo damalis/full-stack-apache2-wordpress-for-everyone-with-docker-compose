@@ -230,8 +230,6 @@ sed -i 's/pma_password/'$pma_password'/' .env
 sed -i "s@directory_path@$(pwd)@" .env
 sed -i 's/local_timezone/'$local_timezone'/' .env
 
-sed -i 's/example.com/'$domain_name'/' ./apache2/extra/httpd-ssl.conf
-
 if [ -x "$(command -v docker)" ] && [ -x "$(command -v docker-compose)" ]; then
 	# Firstly: create external volume
 	docker volume create --driver local --opt type=none --opt device=`pwd`/certbot --opt o=bind certbot-etc > /dev/null
