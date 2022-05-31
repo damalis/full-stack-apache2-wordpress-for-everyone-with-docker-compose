@@ -12,16 +12,18 @@ fi
 
 use_lets_encrypt_certificates() {
 	echo "switching webserver to use Let's Encrypt certificate for $1"
-	sed -i 's/example.com/'$1'/g' $3/extra/httpd-ssl.conf
-	sed '/^#\(.*\)httpd-ssl\.conf/ s/^#//' $3/httpd.conf > $3/httpd.conf.bak
 	sed 's/#LoadModule/LoadModule/' $3/extra/httpd-vhosts.conf > $3/extra/httpd-vhosts.conf.bak
+	sed 's/example.com/'$1'/g' $3/extra/httpd-ssl.conf > $3/extra/httpd-ssl.conf.bak
+	sed '/^#\(.*\)httpd-ssl\.conf/ s/^#//' $3/httpd.conf > $3/httpd.conf.bak	
 }
 
 reload_apache2() {
-	cp $1/httpd.conf.bak $1/httpd.conf
 	cp $1/extra/httpd-vhosts.conf.bak $1/extra/httpd-vhosts.conf
-	rm $1/httpd.conf.bak
+	cp $1/extra/httpd-ssl.conf.bak $1/extra/httpd-ssl.conf
+	cp $1/httpd.conf.bak $1/httpd.conf
+	rm $1/extra/httpd-ssl.conf.bak
 	rm $1/extra/httpd-vhosts.conf.bak
+	rm $1/httpd.conf.bak	
 	echo "Starting webserver apache2 service"
 	httpd -t
 }
