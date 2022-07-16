@@ -206,7 +206,7 @@ services:
         labels:            
             - "docker-volume-backup.stop-during-backup=true"
         command: "-a http=:8080,HTTP -p default_ttl=3600"
-		
+
     backup:
         image: 'futurice/docker-volume-backup'
         container_name: backup
