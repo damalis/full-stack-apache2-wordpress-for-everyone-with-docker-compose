@@ -24,6 +24,7 @@ services:
         links:
             - database
             - redis
+            - varnish
         environment:
             WORDPRESS_DB_HOST: 'database'
             WORDPRESS_DB_USER: '${WORDPRESS_DB_USER}'
@@ -62,6 +63,7 @@ services:
         ports:
             - '80:80'
             - '443:443'
+            - '81:81'
         environment:
             TZ: '${LOCAL_TIMEZONE}'
         labels:            
@@ -183,6 +185,28 @@ services:
             - "docker-volume-backup.stop-during-backup=true"
         command: "redis-server ${REDIS_CONF_PREFIX}/redis/redis.conf"
     
+    varnish:
+        image: 'varnish:stable'
+        container_name: varnish
+        networks:
+            - backend
+        volumes:
+            - type: bind
+              source: ./varnish/default.vcl
+              target: '${VARNISH_CONF_PREFIX}/default.vcl'
+        hostname: varnish
+        tmpfs:
+            - /var/lib/varnish:exec
+        restart: unless-stopped
+        ports:
+            - '8080:80'
+        environment:
+            VARNISH_SIZE: '${VARNISH_SIZE}'
+            TZ: '${LOCAL_TIMEZONE}'
+        labels:            
+            - "docker-volume-backup.stop-during-backup=true"
+        command: "-a http=:8080,HTTP -p default_ttl=3600"
+		
     backup:
         image: 'futurice/docker-volume-backup'
         container_name: backup
