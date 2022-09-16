@@ -209,7 +209,7 @@ pm.max_requests = 1000
 Or you should make changes custom host configurations then must restart service
 
 ```
-docker container restart <wordpress_container_id>
+docker container restart wordpress
 ```
 
 add and/or remove wordpress site folders and files with any ftp client program in ```./wordpress``` folder.
