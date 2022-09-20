@@ -10,7 +10,7 @@ Plus, manage docker containers with Portainer.
 
 #### With this project you can quickly run the following:
 
-- [wordPress (php-fpm)](https://hub.docker.com/_/wordpress/)
+- [wordpress (php-fpm)](https://hub.docker.com/_/wordpress/)
 - [webserver (apache2/httpd)](https://hub.docker.com/_/httpd)
 - [certbot (letsencrypt)](https://hub.docker.com/r/certbot/certbot)
 - [phpMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/)
