@@ -281,4 +281,5 @@ This will back up the all files and folders, once per day, and write it to ./bac
 ##### # backup exclude wordpress, backups folders in /home/ubuntu/damalis
 00 01 * * * tar -czvf /home/ubuntu/${DIRECTORY_PATH}/backups/'backup-example.com-'$(date +"\%Y-\%m-\%dT\%H-\%M-\%S")'.tar.gz' --exclude='wordpress/wp-admin' --exclude='wordpress/wp-includes' --exclude='backups' /home/ubuntu/${DIRECTORY_PATH}
 
-[CronHowto](https://help.ubuntu.com/community/CronHowto)							 
+[CronHowto](https://help.ubuntu.com/community/CronHowto)
+							 
