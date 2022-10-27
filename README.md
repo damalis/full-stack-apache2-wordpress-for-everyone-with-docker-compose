@@ -237,7 +237,7 @@ add and/or remove wordpress site folders and files with any ftp client program i
 
 #### Webserver
 
-add or remove code in the ```./webserver/templates/nginx.conf.template``` file for custom nginx configurations
+add or remove code in the ```./webserver/extra/httpd-ssl.conf``` file for custom nginx configurations
 
 [https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/)
 
