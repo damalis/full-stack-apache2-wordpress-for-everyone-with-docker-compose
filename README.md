@@ -35,9 +35,15 @@ Create rules to open ports to the internet, or to a specific IPv4 address or ran
 
 - [Auto Configuration and Installation](#automatic)
 - [Requirements](#requirements)
-- [Configuration](#configuration)
-- [Installation](#installation)
+- [Manual Configuration and Installation](#manual)
+- [Portainer Installation](#portainer)
 - [Usage](#usage)
+	- [Website](#website)
+	- [Webserver](#webserver)
+	- [Redis Plugin](#redis-plugin)
+	- [Varnish Plugin](#varnish-plugin)
+	- [phpMyAdmin](#phpmyadmin)
+	- [backup](#backup)	  
 
 ## Automatic
 
@@ -68,7 +74,9 @@ Clone this repository or copy the files from this repository into a new folder. 
 
 Make sure to [add your user to the `docker` group](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
 
-## Configuration
+## Manual
+
+### Configuration
 
 download with
 
@@ -81,8 +89,6 @@ Open a terminal and `cd` to the folder in which `docker-compose.yml` is saved an
 ```
 cd full-stack-apache2-wordpress-for-everyone-with-docker-compose
 ```
-
-### Manual
 
 Copy the example environment into `.env`
 
@@ -104,9 +110,7 @@ cp ./phpmyadmin/apache2/sites-available/default-ssl.sample.conf ./phpmyadmin/apa
 
 change example.com to your domain name in ```./phpmyadmin/apache2/sites-available/default-ssl.conf``` file.
 
-## Installation
-
-### Manual
+### Installation
 
 Firstly: will create external volume
 
@@ -128,7 +132,7 @@ The containers are now built and running. You should be able to access the WordP
 
 For convenience you may add a new entry into your hosts file.
 
-### Installation Portainer
+## Portainer
 
 ```
 docker volume create portainer_data
@@ -142,6 +146,14 @@ You can also visit `https://example.com:9001` to access portainer after starting
 ## Usage
 
 #### You could manage docker containers without command line with portainer.
+
+### Show both running and stopped containers
+
+The docker ps command only shows running containers by default. To see all containers, use the -a (or --all) flag:
+
+```
+docker ps -a
+```
 
 ### Starting containers
 
@@ -192,21 +204,29 @@ You can now use the `up` command:
 docker-compose up -d
 ```
 
+#### Docker run reference
+
+[https://docs.docker.com/engine/reference/run/](https://docs.docker.com/engine/reference/run/)
+
 ### Website
+
+You should see the "Wordpress installation" page in your browser. If not, please check if your PHP installation satisfies WordPress's requirements.
+
+```
+https://example.com
+```
 
 add or remove code in the ./php-fpm/php/conf.d/security.ini file for custom php.ini configurations
 
+[https://www.php.net/manual/en/configuration.file.php](https://www.php.net/manual/en/configuration.file.php)
+
 Copy and paste the following code in the ./php-fpm/php-fpm.d/z-www.conf file for php-fpm configurations at 1Gb Ram Host
 
-```
-pm.max_children = 19
-pm.start_servers = 4
-pm.min_spare_servers = 2
-pm.max_spare_servers = 4
-pm.max_requests = 1000
-```
-
 Or you should make changes custom host configurations then must restart service
+
+FPM uses php.ini syntax for its configuration file - php-fpm.conf, and pool configuration files.
+
+[https://www.php.net/manual/en/install.fpm.configuration.php](https://www.php.net/manual/en/install.fpm.configuration.php)
 
 ```
 docker container restart wordpress
@@ -214,6 +234,12 @@ docker container restart wordpress
 
 add and/or remove wordpress site folders and files with any ftp client program in ```./wordpress``` folder.
 <br />You can also visit `https://example.com` to access website after starting the containers.
+
+#### Webserver
+
+add or remove code in the ```./webserver/templates/nginx.conf.template``` file for custom nginx configurations
+
+[https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/)
 
 #### Redis Plugin
 
