@@ -48,10 +48,10 @@ services:
         volumes:
             - 'html:${WEBSERVER_DOC_ROOT}'
             - type: bind
-              source: ./apache2
+              source: ./webserver
               target: '${HTTPD_PREFIX}/conf'            
             - type: bind
-              source: ./apache2/ssl-option/options-ssl-apache.conf
+              source: ./webserver/ssl-option/options-ssl-apache.conf
               target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-apache.conf'
             - type: bind
               source: ./ssl-conf.sh
