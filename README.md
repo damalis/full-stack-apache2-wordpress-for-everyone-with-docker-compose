@@ -1,6 +1,6 @@
 # [full stack apache2 WordPress for everyone with docker compose](https://github.com/damalis/full-stack-apache2-wordpress-for-everyone-with-docker-compose)
 
-If You want to build a website with WordPress at short time; 
+If You want to build a website with WordPress at short time;
 
 #### Full stack Apache2 WordPress:
 <p align="left"> <a href="https://wordpress.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/276006?s=200&v=4" alt="WordPress" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp;  <a href="https://mariadb.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/4739304?s=200&v=4" alt="mariadb" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; <a href="https://www.php.net" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/github/explore/ccc16358ac4530c6a69b1b80c7223cd2744dea83/topics/php/php.png" alt="php" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; <a href="https://redis.io" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/1529926?s=200&v=4" alt="redis" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; <a href="https://www.varnish-software.com/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/577014?s=200&v=4" alt="varnish" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp;
@@ -237,9 +237,9 @@ add and/or remove wordpress site folders and files with any ftp client program i
 
 #### Webserver
 
-add or remove code in the ```./webserver/extra/httpd-ssl.conf``` file for custom nginx configurations
+add or remove code in the ```./webserver/extra/httpd-vhosts.conf``` file for custom apache2/httpd configurations
 
-[https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/)
+[https://httpd.apache.org/docs/2.4/](https://httpd.apache.org/docs/2.4/)
 
 #### Redis Plugin
 
