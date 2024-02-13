@@ -5,6 +5,7 @@ import std;
 backend default {
     .host = "webserver";
     .port = "90";
+    .connect_timeout = 2s;
 }
 
 # Add hostnames, IP addresses and subnets that are allowed to purge content
@@ -122,14 +123,14 @@ sub vcl_recv {
         req.url ~ "^/preview=" ||
         req.url ~ "^/\.well-known/acme-challenge/"
     ) {
-	     set req.http.X-Cacheable = "NO:Logged in/Got Sessions";
-	     if(req.http.X-Requested-With == "XMLHttpRequest") {
-		     set req.http.X-Cacheable = "NO:Ajax";
-	     }
+        set req.http.X-Cacheable = "NO:Logged in/Got Sessions";
+        if(req.http.X-Requested-With == "XMLHttpRequest") {
+            set req.http.X-Cacheable = "NO:Ajax";
+        }
         return(pass);
     }
 	
-	# Remove x-cache-status header
+    # Remove x-cache-status header
     unset req.http.x-cache-status;
 
     # Remove any cookies left
