@@ -337,7 +337,7 @@ define('FORCE_SSL_LOGIN', true);
 define('FORCE_SSL_ADMIN', true);
 ```
 
-after every change in the wordpress and the varnish configuration or if You get error "502 Bad Gateway":
+after every change in the Wordpress and the varnish configuration or if You get error "502 Bad Gateway":
 
 ```
 docker container restart varnish
