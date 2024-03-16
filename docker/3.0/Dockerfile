@@ -1,4 +1,5 @@
 FROM alpine:3.19
+LABEL maintainer="damalis"
 
 RUN set -ex && apk update && apk --update --no-cache add vsftpd
 
