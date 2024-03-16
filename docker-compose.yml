@@ -94,7 +94,7 @@ services:
             retries: 20
         environment:
             TZ: '${LOCAL_TIMEZONE}'
-        entrypoint: /bin/sh -c "certbot certonly --webroot --webroot-path /tmp/acme-challenge --rsa-key-size 4096 --non-interactive --agree-tos --no-eff-email --force-renewal --email ${LETSENCRYPT_EMAIL} -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}; 
+        entrypoint: /bin/sh -c "certbot certonly --webroot --webroot-path /tmp/acme-challenge --rsa-key-size 4096 --non-interactive --agree-tos --no-eff-email --force-renewal --email ${LETSENCRYPT_EMAIL} -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME} -d ftp.${DOMAIN_NAME}; 
             trap exit TERM; while :; do certbot renew --dry-run; sleep 12h & wait $${!}; done;"
 
     phpmyadmin:
@@ -223,6 +223,30 @@ services:
             VARNISH_SIZE: '${VARNISH_SIZE}'
             TZ: '${LOCAL_TIMEZONE}'
         command: "-a http=:8080,HTTP -p default_ttl=3600 -n /tmp/varnish_workdir"
+
+    ftp:
+        build: ./docker/3.0
+        #image: 'damalis/vsftpd:3.0'
+        container_name: ftp
+        networks:
+            - backend
+        volumes:
+            - 'html:${WEBSERVER_DOC_ROOT}'
+            - 'certbot-etc:${LETSENCRYPT_CONF_PREFIX}'
+        hostname: ftp
+        restart: unless-stopped
+        environment:
+            DOMAIN_NAME: '${DOMAIN_NAME}'
+            LETSENCRYPT_CONF_PREFIX: '${LETSENCRYPT_CONF_PREFIX}'            
+            PASV_ADDR_RESOLVE: 'YES'
+            PASV_ENABLE: 'YES'
+            FTP_USER: 'admin'
+            FTP_PASS: '123456789'
+            LOCAL_ROOT: '${WEBSERVER_DOC_ROOT}'
+            SYSLOG_ENABLE: 'NO'
+            TZ: '${LOCAL_TIMEZONE}'
+        labels:
+            - 'docker-volume-backup.stop-during-backup=true'
 
     backup:
         image: offen/docker-volume-backup:latest
