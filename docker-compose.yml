@@ -237,7 +237,7 @@ services:
         restart: unless-stopped
         environment:
             DOMAIN_NAME: '${DOMAIN_NAME}'
-            LETSENCRYPT_CONF_PREFIX: '${LETSENCRYPT_CONF_PREFIX}'            
+            LETSENCRYPT_CONF_PREFIX: '${LETSENCRYPT_CONF_PREFIX}'
             PASV_ADDR_RESOLVE: 'YES'
             PASV_ENABLE: 'YES'
             FTP_USER: '${PMA_CONTROLUSER}'
