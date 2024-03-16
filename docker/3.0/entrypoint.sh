@@ -23,6 +23,7 @@ echo "pasv_min_port=$PASV_MIN_PORT" >> $VSFTPD_CONF
 echo "syslog_enable=$SYSLOG_ENABLE" >> $VSFTPD_CONF
 echo "local_root=$LOCAL_ROOT" >> $VSFTPD_CONF
 echo "rsa_cert_file=${LETSENCRYPT_CONF_PREFIX}/live/${DOMAIN_NAME}/fullchain.pem" >> $VSFTPD_CONF
+echo "rsa_private_key_file=${LETSENCRYPT_CONF_PREFIX}/live/${DOMAIN_NAME}/privkey.pem" >> $VSFTPD_CONF
 
 # Run the vsftpd server
 echo "Running vsftpd"
