@@ -17,7 +17,7 @@ acl purge {
     "::1";
 }
 
-sub vcl_recv {   
+sub vcl_recv {
     # Remove empty query string parameters
     # e.g.: www.example.com/index.html?
     if (req.url ~ "\?$") {
@@ -62,7 +62,7 @@ sub vcl_recv {
     ) {
         return (pipe);
     }
-	
+
     # Remove tracking query string parameters used by analytics tools
     if (req.url ~ "(\?|&)(utm_source|utm_medium|utm_campaign|utm_content|gclid|cx|ie|cof|siteurl)=") {
         set req.url = regsuball(req.url, "&(utm_source|utm_medium|utm_campaign|utm_content|gclid|cx|ie|cof|siteurl)=([A-z0-9_\-\.%25]+)", "");
@@ -238,5 +238,5 @@ sub vcl_deliver {
 	
     # Cleanup of headers
     unset resp.http.x-url;
-    unset resp.http.x-host;    
+    unset resp.http.x-host;
 }
