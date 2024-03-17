@@ -14,9 +14,6 @@ VSFTPD_CONF=/etc/vsftpd/vsftpd.conf
 echo "Update the vsftpd.conf according to env variables"
 echo "pasv_enable=$PASV_ENABLE" >> $VSFTPD_CONF
 
-#PASV_ADDRESS=$(/sbin/ip route|awk '/src/ { print $7 }')
-#echo "pasv_address=$PASV_ADDRESS" >> $VSFTPD_CONF
-
 echo "pasv_addr_resolve=${PASV_ADDR_RESOLVE}" >> $VSFTPD_CONF
 echo "pasv_address=${PASV_ADDRESS}" >> $VSFTPD_CONF
 echo "pasv_min_port=${PASV_MIN_PORT}" >> $VSFTPD_CONF
