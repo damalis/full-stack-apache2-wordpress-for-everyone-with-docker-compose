@@ -94,7 +94,7 @@ services:
             retries: 20
         environment:
             TZ: '${LOCAL_TIMEZONE}'
-        entrypoint: /bin/sh -c "certbot certonly --webroot --webroot-path /tmp/acme-challenge --rsa-key-size 4096 --non-interactive --agree-tos --no-eff-email --force-renewal --email ${LETSENCRYPT_EMAIL} -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME} -d ftp.${DOMAIN_NAME}; 
+        entrypoint: /bin/sh -c "certbot certonly --webroot --webroot-path /tmp/acme-challenge --rsa-key-size 4096 --non-interactive --agree-tos --no-eff-email --force-renewal --email ${LETSENCRYPT_EMAIL} -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}; 
             trap exit TERM; while :; do certbot renew --dry-run; sleep 12h & wait $${!}; done;"
 
     phpmyadmin:
@@ -238,6 +238,9 @@ services:
             - 'certbot-etc:${LETSENCRYPT_CONF_PREFIX}'
         hostname: ftp
         restart: unless-stopped
+        ports:
+            - '20-21:20-21'
+            - '21100-21110:21100-21110'
         environment:
             DOMAIN_NAME: '${DOMAIN_NAME}'
             LETSENCRYPT_CONF_PREFIX: '${LETSENCRYPT_CONF_PREFIX}'
