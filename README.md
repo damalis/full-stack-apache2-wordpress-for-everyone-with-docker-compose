@@ -56,7 +56,7 @@ Plus, manage docker containers with Portainer.
 #### IPv4/IPv6 Firewall
 Create rules to open ports to the internet, or to a specific IPv4 address or range.
 
-- ftp: 22
+- ftp: 20-21
 - http: 80
 - https: 443
 - portainer: 9001
