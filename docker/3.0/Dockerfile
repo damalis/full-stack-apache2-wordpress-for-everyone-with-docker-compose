@@ -1,7 +1,7 @@
 FROM alpine:3.19
 LABEL maintainer="damalis"
 
-RUN set -ex && apk update && apk --update --no-cache add vsftpd
+RUN set -ex && apk update && apk --update --no-cache add vsftpd tzdata
 
 ENV FTP_USER ${FTP_USER:-user}
 ENV FTP_PASS ${FTP_PASS:-pass}
@@ -22,8 +22,8 @@ COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY entrypoint.sh /usr/sbin/entrypoint.sh
 RUN chmod +x /usr/sbin/entrypoint.sh
 
-EXPOSE 22 990 21100-21110
+EXPOSE 20-21 990 ${PASV_MIN_PORT}-${PASV_MAX_PORT}
 
-WORKDIR /var/www/html
+WORKDIR ${LOCAL_ROOT}
 
 ENTRYPOINT ["entrypoint.sh"]
