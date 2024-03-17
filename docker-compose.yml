@@ -225,6 +225,9 @@ services:
         command: "-a http=:8080,HTTP -p default_ttl=3600 -n /tmp/varnish_workdir"
 
     ftp:
+        depends_on:
+            certbot:
+                condition: service_healthy
         build: ./docker/3.0
         #image: 'damalis/vsftpd:3.0'
         container_name: ftp
@@ -238,8 +241,11 @@ services:
         environment:
             DOMAIN_NAME: '${DOMAIN_NAME}'
             LETSENCRYPT_CONF_PREFIX: '${LETSENCRYPT_CONF_PREFIX}'
-            PASV_ADDR_RESOLVE: 'YES'
             PASV_ENABLE: 'YES'
+            PASV_ADDR_RESOLVE: 'YES'
+            PASV_ADDRESS: '${DOMAIN_NAME}'
+            PASV_MIN_PORT: 21100
+            PASV_MAX_PORT: 21110
             FTP_USER: '${PMA_CONTROLUSER}'
             FTP_PASS: '${PMA_CONTROLPASS}'
             LOCAL_ROOT: '${WEBSERVER_DOC_ROOT}'
