@@ -1,8 +1,12 @@
 FROM alpine:3.19
+
+CMD ["/bin/sh"]
+
 LABEL maintainer="damalis"
 
-RUN set -ex && apk update && apk --update --no-cache add vsftpd tzdata
+RUN apk update && apk upgrade && apk --update --no-cache add vsftpd tzdata
 
+ENV LETSENCRYPT_CONF_PREFIX ${LETSENCRYPT_CONF_PREFIX:-/etc/letsencrypt}
 ENV FTP_USER ${FTP_USER:-user}
 ENV FTP_PASS ${FTP_PASS:-pass}
 ENV PASV_ADDR_RESOLVE ${PASV_ADDR_RESOLVE:-NO}
@@ -13,16 +17,16 @@ ENV SYSLOG_ENABLE ${SYSLOG_ENABLE:-NO}
 ENV LOCAL_ROOT ${LOCAL_ROOT:-}
 ENV TZ ${TZ}
 
-RUN mkdir -p /home/vsftpd/${FTP_USER}
+RUN mkdir -p /home/vsftpd/
 RUN chown -R ftp:ftp /home/vsftpd/
-RUN mkdir -p /var/log/vsftpd
+RUN mkdir -p /var/log/vsftpd/
 
-COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY vsftpd.conf /etc/vsftpd/
 
-COPY entrypoint.sh /usr/sbin/entrypoint.sh
+COPY entrypoint.sh /usr/sbin/
 RUN chmod +x /usr/sbin/entrypoint.sh
 
-EXPOSE 20-21 990 ${PASV_MIN_PORT}-${PASV_MAX_PORT}
+EXPOSE 20-21 ${PASV_MIN_PORT}-${PASV_MAX_PORT}
 
 WORKDIR ${LOCAL_ROOT}
 
