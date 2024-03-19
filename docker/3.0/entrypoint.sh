@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 set -e
 
@@ -10,6 +10,7 @@ chown -R ${FTP_USER}:${FTP_USER} /home/vsftpd/
 
 # Building the configuration file
 VSFTPD_CONF=/etc/vsftpd/vsftpd.conf
+more /etc/vsftpd/vsftpd-example.conf > $VSFTPD_CONF
 
 # Update the vsftpd.conf according to env variables
 echo "Update the vsftpd.conf according to env variables"
