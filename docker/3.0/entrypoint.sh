@@ -6,7 +6,7 @@ set -e
 #addgroup -g 433 -S ${FTP_USER}
 adduser -u 431 -D -G ftp -h /home/vsftpd/${FTP_USER} -s /bin/false ${FTP_USER}
 echo "${FTP_USER}:${FTP_PASS}" | /usr/sbin/chpasswd
-chown -R ${FTP_USER}:ftp /home/vsftpd/*
+#chown -R ${FTP_USER}:ftp /home/vsftpd/*
 
 # Building the configuration file
 VSFTPD_CONF=/etc/vsftpd/vsftpd.conf
