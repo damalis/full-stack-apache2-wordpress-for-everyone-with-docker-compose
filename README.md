@@ -359,7 +359,7 @@ The first authorize screen(htpasswd;username or password) and phpmyadmin login s
 
 ### ftp
 
-```Host: ftp.arabamevi.com, Protocol: FTP - File Transfer Protocol, Encryption: Require explicit FTP over TLS, Logon Type: Normal, Username: {PMA_CONTROLUSER}, Password: {PMA_CONTROLPASS}```
+```Protocol: FTP - File Transfer Protocol, Host: ftp.arabamevi.com, Encryption: Require explicit FTP over TLS, Logon Type: Normal, Username: {PMA_CONTROLUSER}, Password: {PMA_CONTROLPASS}```
 
 ### backup
 
