@@ -254,8 +254,6 @@ services:
             LOCAL_ROOT: '${WEBSERVER_DOC_ROOT}'
             SYSLOG_ENABLE: 'NO'
             TZ: '${LOCAL_TIMEZONE}'
-        labels:
-            - 'docker-volume-backup.stop-during-backup=true'
 
     backup:
         image: offen/docker-volume-backup:latest
