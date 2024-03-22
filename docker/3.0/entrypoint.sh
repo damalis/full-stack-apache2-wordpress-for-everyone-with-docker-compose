@@ -2,11 +2,19 @@
 
 set -e
 
-# Add the FTP_USER, change his password and declare him as the owner of his home folder and all subfolders
-#addgroup -g 433 -S ${FTP_USER}
-adduser -u 431 -D -G ftp -h /home/vsftpd/${FTP_USER} -s /bin/false ${FTP_USER}
-echo "${FTP_USER}:${FTP_PASS}" | /usr/sbin/chpasswd
-#chown -R ${FTP_USER}:ftp /home/vsftpd/*
+# Now it is time to create a home for the virtual users
+adduser -u 82 -D -G www-data -h /home/vsftpd -s /bin/false www-data
+chown www-data:www-data -R /home/vsftpd
+chown -R www-data:www-data ${LOCAL_ROOT}
+
+# to create and store user names and passwords is to use 
+# the Openssl could be used to produce a MD5 based BSD password with algorithm 1:
+echo "${FTP_USER}:$(openssl passwd -1 ${FTP_PASS})" > /etc/vsftpd/.passwd
+
+# Set passive address and resolve parameters:
+if [ "${PASV_ADDR_RESOLVE}" = "NO" ]; then
+   PASV_ADDRESS=$(/sbin/ip route|awk '/src/ { print $7 }')
+fi
 
 # Building the configuration file
 VSFTPD_CONF=/etc/vsftpd/vsftpd.conf
@@ -29,3 +37,5 @@ echo "" >> $VSFTPD_CONF
 # Run the vsftpd server
 echo "Running vsftpd"
 /usr/sbin/vsftpd $VSFTPD_CONF
+
+# nc -zv $(/sbin/ip route|awk '/src/ { print $7 }')
