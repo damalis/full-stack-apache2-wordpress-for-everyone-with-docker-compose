@@ -3,7 +3,7 @@
 set -e
 
 # Now it is time to create a home for the virtual users
-adduser -u 82 -D -G www-data -h /home/vsftpd -s /bin/false www-data
+id -u www-data &>/dev/null || adduser -u 82 -D -G www-data -h /home/vsftpd -s /bin/false www-data
 chown www-data:www-data -R /home/vsftpd
 chown -R www-data:www-data ${LOCAL_ROOT}
 
