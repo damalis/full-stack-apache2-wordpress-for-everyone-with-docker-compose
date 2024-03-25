@@ -2,11 +2,6 @@
 
 set -e
 
-# Now it is time to create a home for the virtual users
-id -u www-data &>/dev/null || adduser -u 82 -D -G www-data -h /home/vsftpd -s /bin/false www-data
-chown www-data:www-data -R /home/vsftpd
-chown -R www-data:www-data ${LOCAL_ROOT}
-
 # to create and store user names and passwords is to use 
 # the Openssl could be used to produce a MD5 based BSD password with algorithm 1:
 echo "${FTP_USER}:$(openssl passwd -1 ${FTP_PASS})" > /etc/vsftpd/.passwd
