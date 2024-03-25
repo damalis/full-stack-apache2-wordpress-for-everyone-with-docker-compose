@@ -8,6 +8,15 @@ RUN apk update && apk upgrade \
 	&& apk --update --no-cache add tzdata shadow build-base linux-pam-dev unzip vsftpd openssl \
 	&& rm -rf /tmp/* /var/cache/apk/*
 
+# ensure www-data user exists
+RUN set -x ; \
+	addgroup -g 82 -S www-data ; \
+	adduser -u 82 -D -S -G www-data www-data && exit 0 ; exit 1
+# 82 is the standard uid/gid for "www-data" in Alpine
+# https://git.alpinelinux.org/cgit/aports/tree/main/apache2/apache2.pre-install?h=v3.14.0
+# https://git.alpinelinux.org/cgit/aports/tree/main/lighttpd/lighttpd.pre-install?h=v3.14.0
+# https://git.alpinelinux.org/cgit/aports/tree/main/nginx/nginx.pre-install?h=v3.14.0
+
 ENV LETSENCRYPT_CONF_PREFIX ${LETSENCRYPT_CONF_PREFIX:-/etc/letsencrypt}
 ENV FTP_USER ${FTP_USER:-user}
 ENV FTP_PASS ${FTP_PASS:-pass}
@@ -20,7 +29,6 @@ ENV SYSLOG_ENABLE ${SYSLOG_ENABLE:-NO}
 ENV LOCAL_ROOT ${LOCAL_ROOT:-/var/www/html}
 ENV TZ ${TZ:-America/Los_Angeles}
 
-RUN mkdir -p /home/vsftpd
 RUN mkdir -p /var/log/vsftpd
 
 COPY vsftpd-example.conf /etc/vsftpd/
