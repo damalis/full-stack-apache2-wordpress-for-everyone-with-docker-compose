@@ -32,5 +32,3 @@ echo "" >> $VSFTPD_CONF
 # Run the vsftpd server
 echo "Running vsftpd"
 /usr/sbin/vsftpd $VSFTPD_CONF
-
-# nc -zv $(/sbin/ip route|awk '/src/ { print $7 }')
