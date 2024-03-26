@@ -56,7 +56,6 @@ Plus, manage docker containers with Portainer.
 #### IPv4/IPv6 Firewall
 Create rules to open ports to the internet, or to a specific IPv4 address or range.
 
-- ftp: 20-21, 21100-21110
 - http: 80
 - https: 443
 - portainer: 9001
@@ -74,7 +73,6 @@ Create rules to open ports to the internet, or to a specific IPv4 address or ran
 	- [Redis Plugin](#redis-plugin)
 	- [Varnish Plugin](#varnish-plugin)
 	- [phpMyAdmin](#phpmyadmin)
-	- [ftp](#ftp)
 	- [backup](#backup)
 
 ## Automatic
@@ -356,10 +354,6 @@ You can add your own custom config.inc.php settings (such as Configuration Stora
 You can also visit `https://example.com:9090` to access phpMyAdmin after starting the containers.
 
 The first authorize screen(htpasswd;username or password) and phpmyadmin login screen the username and the password is the same as supplied in the `.env` file.
-
-### ftp
-
-```Protocol: FTP - File Transfer Protocol, Host: ftp.arabamevi.com, Encryption: Require explicit FTP over TLS, Logon Type: Normal, Username: {PMA_CONTROLUSER}, Password: {PMA_CONTROLPASS}```
 
 ### backup
 
