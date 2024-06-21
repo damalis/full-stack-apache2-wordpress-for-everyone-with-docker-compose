@@ -485,7 +485,7 @@ if [ -x "$(command -v docker)" ] && [ "$(docker compose version)" ]; then
 			echo "Website: https://$domain_name"
 			echo "Portainer: https://$domain_name:9001"
 			echo "phpMyAdmin: https://$domain_name:9090"
-			echo "FtpHost: ftp.$domain_name"
+			#echo "FtpHost: ftp.$domain_name"
 			echo ""
 			echo "Ok."
 		fi
