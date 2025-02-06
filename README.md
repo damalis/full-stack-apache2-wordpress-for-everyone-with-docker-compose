@@ -63,7 +63,7 @@ Create rules to open ports to the internet, or to a specific IPv4 address or ran
 
 #### Note
 
-To optimize upload images, look at [the damalis repository](https://github.com/damalis/full-stack-nodejs-for-everyone-with-damalis-repository)
+To optimize upload images, look at [the damalis repository](https://github.com/damalis/full-stack-nodejs-image-optimizer-for-everyone-with-damalis-repository)
 
 #### Required Ram
 
