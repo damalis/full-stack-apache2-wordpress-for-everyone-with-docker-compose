@@ -13,6 +13,7 @@ fi
 use_lets_encrypt_certificates() {
 	echo "switching webserver to use Let's Encrypt certificate for $1"
 	sed 's/#LoadModule/LoadModule/' $3/extra/httpd-vhosts.conf > $3/extra/httpd-vhosts.conf.bak
+	cp $3/extra/httpd-ssl.conf.template $3/extra/httpd-ssl.conf
 	sed 's/example.com/'$1'/g' $3/extra/httpd-ssl.conf > $3/extra/httpd-ssl.conf.bak
 	sed '/^#\(.*\)httpd-ssl\.conf/ s/^#//' $3/httpd.conf > $3/httpd.conf.bak
 }
