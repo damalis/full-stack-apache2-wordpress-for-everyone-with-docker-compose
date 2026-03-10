@@ -373,7 +373,7 @@ define('WP_REDIS_CONFIG', [
 
 add and active [Proxy Cache Purge](https://wordpress.org/plugins/varnish-http-purge/) plugin.
 
-Configure Custom IP -> Set Custom IP: `varnish`
+Proxy Cahe -> Settings -> Configure Custom IP -> Set Custom IP: `varnish`
 
 Configuration file: ```./varnish/default.vcl```
 
